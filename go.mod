@@ -5,6 +5,7 @@ go 1.22.0
 require (
 	github.com/brianvoe/gofakeit/v7 v7.0.3
 	github.com/dsnet/try v0.0.3
+	github.com/go-resty/resty/v2 v2.13.1
 	github.com/twmb/franz-go v1.17.0
 	github.com/zhiminwen/quote v0.0.0-20210113173315-5a6f3293124e
 )
@@ -24,4 +25,5 @@ require (
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/twmb/franz-go/pkg/kmsg v1.8.0 // indirect
 	golang.org/x/crypto v0.24.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
 )
