@@ -4,4 +4,4 @@
 
 
 # Usage
-  go get github.com/zhminchen/waiops
+  go get github.com/zhiminwen/waiops
