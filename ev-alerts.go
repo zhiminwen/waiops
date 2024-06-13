@@ -277,6 +277,12 @@ func (a *EvAlert) SetEventType(classification, pOrr, cond string) *EvAlert {
 	return a
 }
 
+func (a *EvAlert) SetEventTypeAsProblemOrResolution(pOrr string) *EvAlert {
+	a.Type.EventType = pOrr
+	a.UpdateDedupKeyAndSignature()
+	return a
+}
+
 // Set Resource, and set DeduplicationKey, Signature based on Resource and type classification
 func (a *EvAlert) SetResource(res EvResource) *EvAlert {
 	a.Resource = res
