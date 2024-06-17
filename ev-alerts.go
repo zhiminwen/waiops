@@ -89,6 +89,7 @@ type EvAlert struct {
 	OccurrenceTime      EvTime     `json:"occurrenceTime"`
 	FirstOccurrenceTime EvTime     `json:"firstOccurrenceTime"`
 	LastOccurrenceTime  EvTime     `json:"lastOccurrenceTime"`
+	LastStateChangeTime EvTime     `json:"lastStateChangeTime"`
 	Summary             string     `json:"summary"`
 	LangId              string     `json:"langId"`
 	Severity            int        `json:"severity"`
@@ -326,6 +327,7 @@ func (a *EvAlert) SetOccurrenceTime(first, last time.Time, count int) *EvAlert {
 	a.OccurrenceTime = EvTime(first)
 	a.FirstOccurrenceTime = EvTime(first)
 	a.LastOccurrenceTime = EvTime(last)
+	a.LastStateChangeTime = EvTime(last)
 	a.EventCount = count
 	return a
 }
