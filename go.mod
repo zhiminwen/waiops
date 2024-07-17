@@ -7,6 +7,7 @@ require (
 	github.com/dsnet/try v0.0.3
 	github.com/go-resty/resty/v2 v2.13.1
 	github.com/twmb/franz-go v1.17.0
+	github.com/twmb/franz-go/pkg/kadm v1.12.0
 	github.com/zhiminwen/quote v0.0.0-20210113173315-5a6f3293124e
 )
 

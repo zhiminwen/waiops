@@ -231,7 +231,7 @@ func NewRandomEvent() EvEvent {
 	return EvEvent{
 		Id:             gofakeit.UUID(),
 		OccurrenceTime: EvTime(gofakeit.DateRange(time.Now().AddDate(0, 0, -1), time.Now())),
-		Summary:        gofakeit.Sentence(50),
+		Summary:        gofakeit.HackerPhrase(),
 		Severity:       gofakeit.Number(1, 6),
 		Sender:         randomResource(),
 		Resource:       randomResource(),
@@ -241,6 +241,43 @@ func NewRandomEvent() EvEvent {
 		Type:          randomType(),
 	}
 }
+
+func (e *EvEvent) AsJson() []byte {
+	payload := try.E1(json.MarshalIndent(e, "", "  "))
+	return payload
+}
+
+func (e *EvEvent) SetOccurrenceTime(t time.Time) *EvEvent {
+	e.OccurrenceTime = EvTime(t)
+	return e
+}
+
+func (e *EvEvent) SetExpiration(seconds int) *EvEvent {
+	e.ExpirySeconds = seconds
+	return e
+}
+
+func (e *EvEvent) SetEventType(classification, pOrr, cond string) *EvEvent {
+	e.Type = EvType{
+		Classification: classification,
+		EventType:      pOrr,
+		Condition:      cond,
+	}
+	return e
+}
+
+func (e *EvEvent) SetEventTypeAsProblemOrResolution(pOrr string) *EvEvent {
+	e.Type.EventType = pOrr
+	return e
+}
+
+// Set Resource
+func (e *EvEvent) SetResource(res EvResource) *EvEvent {
+	e.Resource = res
+	return e
+}
+
+// alert related
 
 func NewRandomAlert() EvAlert {
 	alert := EvAlert{

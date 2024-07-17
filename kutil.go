@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/twmb/franz-go/pkg/kadm"
 	"github.com/twmb/franz-go/pkg/kgo"
 	"github.com/twmb/franz-go/pkg/sasl/scram"
 )
@@ -71,4 +72,8 @@ func NewSASL512Client(caPemFile, sasl_user, sals_pass string, opts ...kgo.Opt) (
 		return nil, err
 	}
 	return client, nil
+}
+
+func AdminClient(kClient *kgo.Client) *kadm.Client {
+	return kadm.NewClient(kClient)
 }
