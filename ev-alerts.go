@@ -106,7 +106,7 @@ type EvAlert struct {
 	ExpirySeconds       int        `json:"expirySeconds"`
 	Links               []EvLink   `json:"links"`
 
-	Insights []EvInsight `json:"insight"`
+	Insights []EvInsight `json:"insights"`
 
 	// Details             map[string]string `json:"details"`
 }
