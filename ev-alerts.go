@@ -65,6 +65,13 @@ func (t *EvTime) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+type EvInsight struct {
+	Id     string `json:"id"`
+	Type   string `json:"type"`
+	Source string `json:"source"`
+	// Details ??? `json:"details"`
+}
+
 type EvEvent struct {
 	Id             string     `json:"id"`
 	OccurrenceTime EvTime     `json:"occurrenceTime"`
@@ -99,8 +106,9 @@ type EvAlert struct {
 	ExpirySeconds       int        `json:"expirySeconds"`
 	Links               []EvLink   `json:"links"`
 
+	Insight []EvInsight `json:"insight"`
+
 	// Details             map[string]string `json:"details"`
-	// Insight string `json:"insight"`
 }
 
 type EvChangeNotification struct {
