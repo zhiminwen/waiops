@@ -25,7 +25,7 @@ func NewAPI(baseUrl, apiUser, apiKey string) *API {
 	}
 }
 
-func (a *API) CallAPI(uri, method string, payloads ...any) (*resty.Response, error) {
+func (a *API) CreateRequest() *resty.Request {
 	client := resty.New()
 	client.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 
@@ -34,6 +34,12 @@ func (a *API) CallAPI(uri, method string, payloads ...any) (*resty.Response, err
 		SetHeader("X-TenantID", a.tenantID).
 		SetHeader("Authorization", "ZenApiKey "+a.zenToken).
 		SetHeader("Accept", "application/json")
+
+	return request
+}
+
+func (a *API) CallAPI(uri, method string, payloads ...any) (*resty.Response, error) {
+	request := a.CreateRequest()
 
 	var resp *resty.Response
 	var err error
