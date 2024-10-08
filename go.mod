@@ -22,9 +22,11 @@ require (
 	github.com/klauspost/compress v1.17.8 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/twmb/franz-go/pkg/kmsg v1.8.0 // indirect
+	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	golang.org/x/crypto v0.24.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
 )
