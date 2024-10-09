@@ -58,12 +58,21 @@ func WithTags(tags []string) VertexOpts {
 	}
 }
 
-func WithReferences(toUniqueId, edgeType string) VertexOpts {
+func WithToReferences(toUniqueId, edgeType string) VertexOpts {
 	return func(v *Vertex) {
 		if !validateEdgeType(edgeType) {
 			panic(fmt.Sprintf("invalid edge type: %s", edgeType))
 		}
 		v.References = append(v.References, Reference{ToUniqueId: toUniqueId, EdgeType: edgeType}) //v.References{
+	}
+}
+
+func WithFromReferences(fromUniqueId, edgeType string) VertexOpts {
+	return func(v *Vertex) {
+		if !validateEdgeType(edgeType) {
+			panic(fmt.Sprintf("invalid edge type: %s", edgeType))
+		}
+		v.References = append(v.References, Reference{FromUniqueId: fromUniqueId, EdgeType: edgeType}) //v.References{
 	}
 }
 
@@ -124,8 +133,9 @@ func WithOperation(operation string) VertexOpts {
 }
 
 type Reference struct {
-	ToUniqueId string `json:"_toUniqueId"` //vert doesn't have to exists yet
-	EdgeType   string `json:"_edgeType"`
+	FromUniqueId string `json:"_fromUniqueId"` //vert doesn't have "from" exists yet
+	ToUniqueId   string `json:"_toUniqueId"`   //vert doesn't have to exists yet
+	EdgeType     string `json:"_edgeType"`
 }
 
 func NewVertex(name string, opts ...VertexOpts) *Vertex {
