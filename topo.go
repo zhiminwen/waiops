@@ -19,7 +19,11 @@ type Vertex struct {
 	Tags        []string    `json:"tags,omitempty"`
 	References  []Reference `json:"_reference,omitempty"`
 }
-
+type Reference struct {
+	FromUniqueId string `json:"_fromUniqueId,omitempty"` //vert doesn't have "from" exists yet
+	ToUniqueId   string `json:"_toUniqueId,omitempty"`   //vert doesn't have to exists yet
+	EdgeType     string `json:"_edgeType,omitempty"`
+}
 type VertexOpts func(*Vertex)
 
 func WithName(name string) VertexOpts {
@@ -130,12 +134,6 @@ func WithOperation(operation string) VertexOpts {
 	return func(v *Vertex) {
 		v.Operation = operation
 	}
-}
-
-type Reference struct {
-	FromUniqueId string `json:"_fromUniqueId"` //vert doesn't have "from" exists yet
-	ToUniqueId   string `json:"_toUniqueId"`   //vert doesn't have to exists yet
-	EdgeType     string `json:"_edgeType"`
 }
 
 func NewVertex(name string, opts ...VertexOpts) *Vertex {
