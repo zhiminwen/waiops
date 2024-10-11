@@ -18,6 +18,8 @@ type Vertex struct {
 	MatchTokens []string    `json:"matchTokens,omitempty"`
 	Tags        []string    `json:"tags,omitempty"`
 	References  []Reference `json:"_reference,omitempty"`
+
+	Properties map[string]any `json:"properties,omitempty"` //extra properties
 }
 type Reference struct {
 	FromUniqueId string `json:"_fromUniqueId,omitempty"` //vert doesn't have "from" exists yet
