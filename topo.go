@@ -144,6 +144,7 @@ func NewVertex(name string, opts ...VertexOpts) *Vertex {
 		Name:        name,
 		UniqueId:    name,
 		MatchTokens: []string{name},
+		Properties:  map[string]any{},
 	}
 
 	for _, opt := range opts {
