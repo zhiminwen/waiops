@@ -19,6 +19,8 @@ type Vertex struct {
 	Tags        []string    `json:"tags,omitempty"`
 	References  []Reference `json:"_reference,omitempty"`
 
+	Provider string `json:"_provider,omitempty"`
+
 	Properties map[string]any `json:"properties,omitempty"` //extra properties
 }
 type Reference struct {
@@ -135,6 +137,12 @@ func validateEdgeType(edgeType string) bool {
 func WithOperation(operation string) VertexOpts {
 	return func(v *Vertex) {
 		v.Operation = operation
+	}
+}
+
+func WithProvider(provider string) VertexOpts {
+	return func(v *Vertex) {
+		v.Provider = provider
 	}
 }
 
