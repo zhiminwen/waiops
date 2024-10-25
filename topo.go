@@ -150,6 +150,8 @@ func validateEdgeType(edgeType string) bool {
 
     dependsOn
     runsOn
+
+		partOf
   `)
 
 	return slices.Contains(list, edgeType)
