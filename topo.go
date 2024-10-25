@@ -27,6 +27,9 @@ type Reference struct {
 	FromUniqueId string `json:"_fromUniqueId,omitempty"` //vert doesn't have "from" exists yet
 	ToUniqueId   string `json:"_toUniqueId,omitempty"`   //vert doesn't have to exists yet
 	EdgeType     string `json:"_edgeType,omitempty"`
+
+	ToProvider   string `json:"_toProvider,omitempty"`
+	FromProvider string `json:"_fromProvider,omitempty"`
 }
 type VertexOpts func(*Vertex)
 
