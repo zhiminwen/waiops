@@ -17,7 +17,7 @@ type Vertex struct {
 
 	MatchTokens []string    `json:"matchTokens,omitempty"`
 	Tags        []string    `json:"tags,omitempty"`
-	References  []Reference `json:"_reference,omitempty"`
+	References  []Reference `json:"_references,omitempty"`
 
 	Provider string `json:"_provider,omitempty"`
 
