@@ -78,12 +78,30 @@ func WithToReferences(toUniqueId, edgeType string) VertexOpts {
 	}
 }
 
+func WithExternalToReferences(toProvider, toUniqueId, edgeType string) VertexOpts {
+	return func(v *Vertex) {
+		if !validateEdgeType(edgeType) {
+			panic(fmt.Sprintf("invalid edge type: %s", edgeType))
+		}
+		v.References = append(v.References, Reference{ToProvider: toProvider, ToUniqueId: toUniqueId, EdgeType: edgeType}) //v.References{
+	}
+}
+
 func WithFromReferences(fromUniqueId, edgeType string) VertexOpts {
 	return func(v *Vertex) {
 		if !validateEdgeType(edgeType) {
 			panic(fmt.Sprintf("invalid edge type: %s", edgeType))
 		}
 		v.References = append(v.References, Reference{FromUniqueId: fromUniqueId, EdgeType: edgeType}) //v.References{
+	}
+}
+
+func WithExternalFromReferences(fromProvider, fromUniqueId, edgeType string) VertexOpts {
+	return func(v *Vertex) {
+		if !validateEdgeType(edgeType) {
+			panic(fmt.Sprintf("invalid edge type: %s", edgeType))
+		}
+		v.References = append(v.References, Reference{FromProvider: fromProvider, FromUniqueId: fromUniqueId, EdgeType: edgeType}) //v.References{
 	}
 }
 
