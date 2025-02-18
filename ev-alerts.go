@@ -40,7 +40,7 @@ type EvResource struct {
 
 type EvType struct {
 	Classification string `json:"classification"`
-	EventType      string `json:"eventType"`
+	EventType      string `json:"eventType"` // problem, resolution
 	Condition      string `json:"condition"`
 }
 
@@ -86,7 +86,7 @@ type EvEvent struct {
 
 type EvAlert struct {
 	Id                  string     `json:"id"`
-	State               string     `json:"state"`
+	State               string     `json:"state"` //open, clear, closed,
 	EventCount          int        `json:"eventCount"`
 	Acknowledged        bool       `json:"acknowledged"`
 	Team                string     `json:"team"`
@@ -106,9 +106,8 @@ type EvAlert struct {
 	ExpirySeconds       int        `json:"expirySeconds"`
 	Links               []EvLink   `json:"links"`
 
-	Insights []EvInsight `json:"insights"`
-
-	// Details             map[string]string `json:"details"`
+	Insights []EvInsight       `json:"insights"`
+	Details  map[string]string `json:"details"`
 }
 
 type EvChangeNotification struct {
