@@ -82,6 +82,8 @@ type EvEvent struct {
 	ExpirySeconds  int        `json:"expirySeconds"`
 	Links          []EvLink   `json:"links"`
 	Type           EvType     `json:"type"`
+
+	Details map[string]string `json:"details"`
 }
 
 type EvAlert struct {
