@@ -36,6 +36,38 @@ type EvResource struct {
 	AccessScope  string `json:"accessScope"`
 	ConnectionId string `json:"connectionId"`
 	ScopeId      string `json:"scopeId"`
+
+	Extras map[string]any `json:"-"` //embed a map for random key value pair
+}
+
+func (r *EvResource) MarshalJSON() ([]byte, error) {
+	res := make(map[string]any)
+	res["name"] = r.Name
+	res["sourceId"] = r.SourceId
+	res["hostname"] = r.Hostname
+	res["ipAddress"] = r.IpAddress
+	res["service"] = r.Service
+	res["port"] = r.Port
+	res["interface"] = r.Interface
+	res["application"] = r.Application
+	res["controller"] = r.Controller
+	res["component"] = r.Component
+	res["cluster"] = r.Cluster
+	res["location"] = r.Location
+	res["accessScope"] = r.AccessScope
+	res["connectionId"] = r.ConnectionId
+	res["scopeId"] = r.ScopeId
+
+	if r.Extras != nil {
+		for k, v := range r.Extras {
+			res[k] = v
+		}
+	}
+	return json.Marshal(res)
+}
+
+func (r *EvResource) UnmarshalJSON(b []byte) error {
+	return nil
 }
 
 type EvType struct {
