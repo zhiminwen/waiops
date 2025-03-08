@@ -37,10 +37,10 @@ type EvResource struct {
 	ConnectionId string `json:"connectionId"`
 	ScopeId      string `json:"scopeId"`
 
-	Extras map[string]any `json:"-"` //embed a map for random key value pair
+	Extras map[string]any //embed a map for random key value pair
 }
 
-func (r *EvResource) MarshalJSON() ([]byte, error) {
+func (r EvResource) MarshalJSON() ([]byte, error) {
 	res := make(map[string]any)
 	res["name"] = r.Name
 	res["sourceId"] = r.SourceId
@@ -67,6 +67,80 @@ func (r *EvResource) MarshalJSON() ([]byte, error) {
 }
 
 func (r *EvResource) UnmarshalJSON(b []byte) error {
+	var dict map[string]any
+	if err := json.Unmarshal(b, &dict); err != nil {
+		return err
+	}
+
+	r.Extras = make(map[string]any)
+
+	// Extract known fields
+	if name, ok := dict["name"].(string); ok {
+		r.Name = name
+		delete(dict, "name") // Remove it from the map
+	}
+	if sourceId, ok := dict["sourceId"].(string); ok {
+		r.SourceId = sourceId
+		delete(dict, "sourceId") // Remove it from the map
+	}
+	if hostname, ok := dict["hostname"].(string); ok {
+		r.Hostname = hostname
+		delete(dict, "hostname") // Remove it from the map
+	}
+	if ipAddress, ok := dict["ipAddress"].(string); ok {
+		r.IpAddress = ipAddress
+		delete(dict, "ipAddress") // Remove it from the map
+	}
+	if service, ok := dict["service"].(string); ok {
+		r.Service = service
+		delete(dict, "service") // Remove it from the map
+	}
+	if port, ok := dict["port"].(int); ok {
+		r.Port = int(port)
+		delete(dict, "port") // Remove it from the map
+	}
+	if iface, ok := dict["interface"].(string); ok {
+		r.Interface = iface
+		delete(dict, "interface") // Remove it from the map
+	}
+	if application, ok := dict["application"].(string); ok {
+		r.Application = application
+		delete(dict, "application") // Remove it from the map
+	}
+	if controller, ok := dict["controller"].(string); ok {
+		r.Controller = controller
+		delete(dict, "controller") // Remove it from the map
+	}
+	if component, ok := dict["component"].(string); ok {
+		r.Component = component
+		delete(dict, "component") // Remove it from the map
+	}
+	if cluster, ok := dict["cluster"].(string); ok {
+		r.Cluster = cluster
+		delete(dict, "cluster") // Remove it from the map
+	}
+	if location, ok := dict["location"].(string); ok {
+		r.Location = location
+		delete(dict, "location") // Remove it from the map
+	}
+	if accessScope, ok := dict["accessScope"].(string); ok {
+		r.AccessScope = accessScope
+		delete(dict, "accessScope") // Remove it from the map
+	}
+	if connectionId, ok := dict["connectionId"].(string); ok {
+		r.ConnectionId = connectionId
+		delete(dict, "connectionId") // Remove it from the map
+	}
+	if scopeId, ok := dict["scopeId"].(string); ok {
+		r.ScopeId = scopeId
+		delete(dict, "scopeId") // Remove it from the map
+	}
+
+	// Add remaining fields to the embedded map
+	for k, v := range dict {
+		r.Extras[k] = v
+	}
+
 	return nil
 }
 

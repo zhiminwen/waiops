@@ -19,7 +19,7 @@ func TestEvResourceRandomField(t *testing.T) {
 	res.Extras["extraK1"] = "value1"
 	res.Extras["extraK2"] = "value2"
 
-	t.Log(res.Extras["extraK1"])
+	t.Log(res)
 	content := try.E1(json.MarshalIndent(res, "", "  "))
 	t.Log(string(content))
 }
