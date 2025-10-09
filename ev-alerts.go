@@ -158,7 +158,7 @@ type EvTime time.Time
 
 func (t EvTime) MarshalJSON() ([]byte, error) {
 	// 2023-08-23T20:41:12.420Z
-	return json.Marshal(time.Time(t).Format("2006-01-02T15:04:05.000Z"))
+	return json.Marshal(time.Time(t).UTC().Format("2006-01-02T15:04:05.000Z"))
 }
 
 func (t *EvTime) UnmarshalJSON(b []byte) error {
