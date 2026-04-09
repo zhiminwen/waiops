@@ -72,3 +72,29 @@ func TestEvResourceUnmarshalJSONMissingFieldsUseZeroValues(t *testing.T) {
 		t.Fatalf("expected extra field to be preserved, got %v", newres.Extras["extraK1"])
 	}
 }
+
+func TestUpdateDedupKeyAndSignatureIgnoresExtras(t *testing.T) {
+	alert := EvAlert{
+		Resource: EvResource{
+			Name: "node1",
+			Extras: map[string]any{
+				"env":   "prod",
+				"owner": "team-a",
+			},
+		},
+		Type: EvType{
+			Classification: "system",
+			Condition:      "degraded",
+		},
+	}
+
+	alert.UpdateDedupKeyAndSignature()
+
+	expected := "{name=node1}-system-degraded"
+	if alert.DeduplicationKey != expected {
+		t.Fatalf("expected deduplication key %q, got %q", expected, alert.DeduplicationKey)
+	}
+	if alert.Signature != expected {
+		t.Fatalf("expected signature %q, got %q", expected, alert.Signature)
+	}
+}

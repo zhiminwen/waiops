@@ -484,13 +484,21 @@ func (a *EvAlert) UpdateDedupKeyAndSignature() *EvAlert {
 	ref := reflect.ValueOf(a.Resource)
 	keys := []string{}
 	for i := 0; i < ref.NumField(); i++ {
-		k := ref.Type().Field(i).Tag.Get("json")
+		field := ref.Type().Field(i)
+		if field.Name == "Extras" {
+			continue
+		}
+		k := field.Tag.Get("json")
 		f := ref.Field(i)
-		val := ref.Field(i).String()
+		val := ""
 
 		switch f.Kind() {
+		case reflect.String:
+			val = f.String()
 		case reflect.Int:
 			val = fmt.Sprintf("%d", f.Int())
+		default:
+			continue
 		}
 		if val != "" && val != "0" {
 			dkey[k] = val
