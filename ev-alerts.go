@@ -42,24 +42,55 @@ type EvResource struct {
 
 func (r EvResource) MarshalJSON() ([]byte, error) {
 	res := make(map[string]any)
-	res["name"] = r.Name
-	res["sourceId"] = r.SourceId
-	res["hostname"] = r.Hostname
-	res["ipAddress"] = r.IpAddress
-	res["service"] = r.Service
+	if r.Name != "" {
+		res["name"] = r.Name
+	}
+	if r.SourceId != "" {
+		res["sourceId"] = r.SourceId
+	}
+	if r.Hostname != "" {
+		res["hostname"] = r.Hostname
+	}
+	if r.IpAddress != "" {
+		res["ipAddress"] = r.IpAddress
+	}
+	if r.Service != "" {
+		res["service"] = r.Service
+	}
 	res["port"] = r.Port
-	res["interface"] = r.Interface
-	res["application"] = r.Application
-	res["controller"] = r.Controller
-	res["component"] = r.Component
-	res["cluster"] = r.Cluster
-	res["location"] = r.Location
-	res["accessScope"] = r.AccessScope
-	res["connectionId"] = r.ConnectionId
-	res["scopeId"] = r.ScopeId
+	if r.Interface != "" {
+		res["interface"] = r.Interface
+	}
+	if r.Application != "" {
+		res["application"] = r.Application
+	}
+	if r.Controller != "" {
+		res["controller"] = r.Controller
+	}
+	if r.Component != "" {
+		res["component"] = r.Component
+	}
+	if r.Cluster != "" {
+		res["cluster"] = r.Cluster
+	}
+	if r.Location != "" {
+		res["location"] = r.Location
+	}
+	if r.AccessScope != "" {
+		res["accessScope"] = r.AccessScope
+	}
+	if r.ConnectionId != "" {
+		res["connectionId"] = r.ConnectionId
+	}
+	if r.ScopeId != "" {
+		res["scopeId"] = r.ScopeId
+	}
 
 	if r.Extras != nil {
 		for k, v := range r.Extras {
+			if str, ok := v.(string); ok && str == "" {
+				continue
+			}
 			res[k] = v
 		}
 	}
